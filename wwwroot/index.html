@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Queries SQL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Gerador de Queries SQL</h1>
+        <p>Gere e execute queries sobre a tabela <code>produtos</code>. Escolha as colunas, os filtros e a ordenação.</p>
+
+        <section>
+            <h2>Colunas (SELECT)</h2>
+            <div id="select-container">
+                <label><input type="checkbox" id="select-all"> Todas as colunas (*)</label>
+                <div id="select-columns"></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Filtros (WHERE)</h2>
+            <div id="where-rows"></div>
+            <button type="button" id="add-where">Adicionar filtro</button>
+        </section>
+
+        <section>
+            <h2>Ordenação (ORDER BY)</h2>
+            <div id="orderby-rows"></div>
+            <button type="button" id="add-orderby">Adicionar ordenação</button>
+        </section>
+
+        <section>
+            <label>Limite de linhas
+                <input type="number" id="limit" value="100" min="1" max="1000">
+            </label>
+        </section>
+
+        <button type="button" id="run">Executar query</button>
+
+        <section id="sql-section" class="hidden">
+            <h2>SQL gerado</h2>
+            <pre id="sql-output"><code></code></pre>
+        </section>
+
+        <section id="error-section" class="hidden error">
+            <h2>Erro</h2>
+            <p id="error-message"></p>
+        </section>
+
+        <section id="results-section" class="hidden">
+            <h2>Resultados (<span id="row-count">0</span> linhas)</h2>
+            <table id="results-table">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
