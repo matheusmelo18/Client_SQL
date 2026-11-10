@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.*" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="client_sql.Tests/**" />
+    <EmbeddedResource Remove="client_sql.Tests/**" />
+    <None Remove="client_sql.Tests/**" />
+  </ItemGroup>
 </Project>
