@@ -16,6 +16,12 @@ function renderSelectColumns(cols) {
     const container = document.getElementById('select-columns');
     const allCb = document.getElementById('select-all');
     container.innerHTML = '';
+    allCb.addEventListener('change', () => {
+        if (allCb.checked) {
+            for (const c of container.querySelectorAll('input')) c.checked = false;
+        }
+        updateAllState();
+    });
     for (const col of cols) {
         const id = `select-${col.name}`;
         const label = document.createElement('label');
@@ -25,12 +31,6 @@ function renderSelectColumns(cols) {
         cb.value = col.name;
         cb.addEventListener('change', () => {
             if (cb.checked) allCb.checked = false;
-            updateAllState();
-        });
-        allCb.addEventListener('change', () => {
-            if (allCb.checked) {
-                for (const c of container.querySelectorAll('input')) c.checked = false;
-            }
             updateAllState();
         });
         label.appendChild(cb);
@@ -194,8 +194,10 @@ function buildRequest() {
     const where = [];
     const whereRows = document.getElementById('where-rows').querySelectorAll('.where-row');
     whereRows.forEach((row, i) => {
+        const column = row.querySelector('.column-select').value;
+        if (column === '') return;
         where.push({
-            column: row.querySelector('.column-select').value,
+            column,
             operator: row.querySelector('.operator-select').value,
             value: row.querySelector('.value-input').value,
             conjunction: row.querySelector('.conjunction-select').value
@@ -214,11 +216,6 @@ function buildRequest() {
     const limit = parseInt(document.getElementById('limit').value, 10) || 100;
 
     return { select, where, orderBy, limit };
-}
-
-function showSection(id) {
-    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
 }
 
 function showError(msg) {
